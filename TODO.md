@@ -1,20 +1,74 @@
-- do a webvr demo with a hole in the ground. - good for tango
-  - possible demo: hole in the wall, refraction, liquid marker but on all the wall
-  - code a webvr demo
+- DONE make multi-markers to support aruco too
+  - add arBackend in learner.html input
+  - handle arBackend definition in player.html
+- DONE add modelViewMatrix and a smoother in AR.js example ?
+  - what would be a good example for aruco feature in ar.js
+  - yep add that because this is like the default now
 
-- put refraction in a threex, same for hole-in-the-wall and liquid-markers
-  - in examples/threex/
-  - thus i can reuse them
-  - apply to webvr and to multi marker
-  - refraction - large torus 
-  - liquid-markers - multi plane ? video with neo effect
-  - hole in the wall - aka the duck pool
-  - hole in the wall - actual portal
+---
+  
+- DONE ArMarkerControls.markerId is artoolkit specific
+  - to rename artoolkitMarkerId for now
+- DONE ArToolkitContext.projectionAxisTransformMatrix is only to correct artoolkit axis
+  - it is a kludge to start with
+  - make it as contained as possible
+  - maybe cached in a ARtoolkit specific function
+  - projectionAxisTransformMatrix renamed as artoolkitprojectionAxisTransformMatrix
+  - simple, no risk and make it clear it is artoolkit - 
+- DONE in arbackend-switch put the backend in hash. and offer to switch
+  - good for testing
+- DONE all this testing about aruco or jsartoolkit it crappy
+  - in artoolkitContext.backend === 'aruco' || 'artoolkit'
+  - not very clear + timer to init jsartoolkit
+  - so you keep the pointer to context for each. But you test all about the .backend = 'artoolkit'
+- DONE arucocontext has the canvas at the moment - but dont respect the original canvasWidth
+- DONE all the posit stuff MUST be out of aruco context and in controls
+- DONE replace THREEx.ArMarkerControls.notifyFoundModelViewMatrix() by .updateWithModelViewMatrix()
+- LATER: remove all the artoolkit mention in the front as is now multiple backends
+  - you got classname with 'artoolkit' in it
+  - even exposed in a-frame parameters
+- NOT NOW: threex-aruco layer is really really thin - YET ANOTHER INDIRECTION
+  - seems useless indirection for AR.js
+  - why not aruco directly
+  - you are using jsartoolkit directly
+  - YES use aruco directly
+  - threex-aruco is at the same level of jsartoolkit
+    - keeping them at the same level will help make ar.js more consistent
+  - threex-aruco provide standalone testing which is good
+  - UNCLEAR at best - 
+
+- can you make it easy to try all your demo with aruco
+  - this means supporting aruco in webar-playground
+  - so multi markers
+  - may even be an option in the json localstorage learned area
+  - thus it is easy to switch from one to another
+  - the best way to put aruco as first player
+
+- aruco seems the future
+  - there is pure js implementation - readable code
+  - there is a cpp implementation too
+  - much smaller code
+  - well documented code + algo
+  - simple algo - easy to understand
+  - not too big - i can maintain it myself
+  - i got MUCH better controls over the code
+  - this lead to ability to tune and experiments with the detection
+  - the detection is the core of the business. it MUCH be under controls
+  - still issue with homography
+  - but can be easily fixed, compared to the huge advantage
+  
+
+---
+# TODO
+- if artoolkit arbackend and marker facing camera, then change the tweening
+  - specific fix to artoolkit
+- TODO super unclear how to get the backward facing camera...
 
 - currently webvr is able to do location already
   - why wouldnt i code it all in webvr location, without the stereo rendering
   - well it is too early. it is better to make it easier to reuse.
   - webvr tango isnt mature enougth
+
 
 - release soon and start doing dev/master
   - create a dev branch
@@ -38,6 +92,27 @@
 
 ---
 
+- DONE do a pass on THREEx.ArToolkitSource
+  - IOS support - https://github.com/jeromeetienne/AR.js/issues/90
+  - support for torch - https://www.oberhofer.co/mediastreamtrack-and-its-capabilities/
+  - use the new getUserMedia API with envfacing api - see IOS bugs
+- DONE update link in README.md
+- DONE THREEx.ArToolkitSource.prototype.onResize
+  split it in 
+  THREEx.ArToolkitSource.prototype.mirrorSizeTo(blabla)
+- DONE Race conditions in resize
+  - arToolkitSource.onResize([renderer.domElement, arToolkitContext.arController.canvas])
+  - fails if arToolkitContext.arController not ready
+  - change this code, and port is EVERYWHERE :)
+- DONE rename marker generator as marker-training - just because it is what artoolkit said before
+  - maybe creator ? 
+  - training is the same word as before, and seems to do something smart
+- DONE do something to upload marker from image directly instead of .patt
+  - this avoid the pain of handling .patt files
+  - so get the image encoding it, and then do a dataurl
+  - as the data is image
+- DONE THREEx.ArSmoothedControls.minVisibleDelay to 0 ?
+  - why would it be worst to show the marker, than to hide it ? 
 - DONE bug in resize + debug in context
   - API is still crap tho
 - DONE do the tweening + disapearance with timeout in threex-armarkersmoother.js

@@ -1,23 +1,31 @@
 - CLEAN UP STUFF
-- in player, load the hardcoded from a file
+- NOGO in player, load the hardcoded from a file
   - clean up the code and demo the case
   - link the hardcoded one with the image of the multi marker
-- in player, remove the function multiMarkerPlay() - serialise it
-  - either you take it from localstore or hardcoded
-- in player, parameters this is a sceneName='' in the url
-  - maybe some placements depending multi placements
-  - all this code will be copyed directly in chromiumAR
-  - 
-- DONE appMode: areaUsing become areaSource: 'localStorage' or 'hardcodedABCF'
-- DONE add link to the abcf images
-  - it is in https://github.com/artoolkit/artoolkit5/blob/master/doc/patterns/Multi%20pattern%20(template%2C%20A4).pdf
-  - take a screenshots
-  - store it in data/images
+
 - clean up data/images
   - a lot of file from experiementation qr-code or multimarker
   - remove them
 
 - park official jsartoolkit stuff
+
+
+---
+# Porting to a-frame
+- port only multi markers controls
+- start the port
+- it will make it easier to do demo and accessible for aframe people
+- preset='multimarker-localstorage'
+
+- put the smoother on option for aframe
+- use the profile by default
+  - remove all the default from the aframe configuration
+  - so first, init basic of profile, then push specific configuration from configuration
+  - avoid to duplicate all the default
+
+
+---
+
 - posts "Area Learning with Marker-based Augmented Reality"
   - larger AR
   - more stable AR
@@ -28,7 +36,11 @@
 - algo definition: ALGORITHM.md here
   - how to learn
   - how to use 
-  - may become a post on medium 
+  - may become a post on medium
+
+---
+
+
 
 
 
